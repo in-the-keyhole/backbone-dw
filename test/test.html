@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://underscorejs.org/underscore-min.js"></script>
+	<script src="http://backbonejs.org/backbone.js"></script>
+	
+	<script src="../dw-cache.js"></script>
+	
+</head>
+<body >
+
+	<div></div>
+
+</body>
+</html>
+
+<script>
+		
+	var View = Backbone.View.extend({
+		render: function() {
+			this.$el.append(this.make("b", {"class": "bold"}, "Bold!"));
+			this.$el.append(this.make("button", {"class": "btn"}, "remove"));
+			return this;
+		}
+	});
+	var view = new View();
+	view.render();
+	$('div').append(view.el);
+	view.$el.attr('id', view.cid);
+	
+	$('.btn').on('click', function() {
+		Backbone.cache.find($(this).closest('div').attr('id')).destroy();
+	})
+	
+	
+</script>
